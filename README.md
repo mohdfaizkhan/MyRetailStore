@@ -19,7 +19,8 @@ System	&	technology	used:
 6. Hibernate	5.x.x
 7. Primefaces	6.x.x
 8. MySQL	database
-9. pom.xml	file	contains	all	the	dependencies	(as	it’s	a	maven	project)
+9. Sonar -- For test coverage
+10. pom.xml	file	contains	all	the	dependencies	(as	it’s	a	maven	project)
 
 
 # Credentials
