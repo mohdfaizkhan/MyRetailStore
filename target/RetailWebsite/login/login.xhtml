@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+                
+ <head>
+<title>Login page</title>
+</head>
+<ui:composition template="/WEB-INF/template.xhtml">
+
+<ui:define name="content">
+
+<h:form prependId="false" id="loginForm">
+<p:messages id="messages" for="loginBtn" style="color: white;background-color: red;"  autoUpdate="true" closable="true" rendered="#{not loginBean.validCredentials}"/>		
+<h:panelGrid columns="3" cellpadding="15" styleClass=" login-panel">
+				    
+				    <h:outputText value="User name" />
+				    <p:inputText id="username" required="true" requiredMessage="Please enter User name" value="#{loginBean.userName}">
+				      <p:keyFilter regEx="/[a-z0-9_]/i"/> 
+				    </p:inputText>
+				    <p:message for="username" display="text">
+		  			</p:message>
+				    
+				    <h:outputText value="Password" />
+				    <p:password id="password" required="true" requiredMessage="Please enter Password" value="#{loginBean.password}" >
+				       <p:keyFilter regEx="/[a-z0-9_]/i"/> 
+				    </p:password>
+				    <p:message for="password" display="text">
+		  			</p:message>
+		  			
+		  	         <p:commandButton id="loginBtn" value="Login" validateClient="false" action="#{loginBean.onLogin}" process="@form" update="loginForm"></p:commandButton>
+		
+				     <p:commandButton  value="Clear" validateClient="false" action="#{loginBean.onClear}" process="@form" update="loginForm"></p:commandButton>
+
+					
+</h:panelGrid>	
+
+</h:form>
+</ui:define>
+</ui:composition>
+</html>

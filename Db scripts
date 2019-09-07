@@ -1,0 +1,12 @@
+CREATE TABLE `customer_details` (
+  `customer_id` int(12) NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(200) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `telephone` varchar(20) DEFAULT NULL,
+  `customer_type` varchar(45) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
+) 

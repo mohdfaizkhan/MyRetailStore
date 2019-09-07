@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+<head>
+<title>Summary page</title>
+</head>
+<ui:composition template="/WEB-INF/template.xhtml">
+
+<ui:define name="content">
+    <p:tabView id="mainForm" widgetVar="tabPanel">
+    <p:ajax event="tabChange" listener="#{landingManagedBean.onTabChange}" update=":mainForm:tab1,:mainForm:tab2,:mainForm:tab3"/>
+        <p:tab title="Home">
+            <h:form prependId="false" id="tab1">
+            
+	            <h:panelGrid columns="3" cellpadding="10">
+	              <h:outputText style="color:white" value="Enter the Customer ID"></h:outputText>
+	              <p:inputText id="custId" value="#{landingManagedBean.customerId}" required="true" requiredMessage="Please enter Customer ID">
+	                 <p:keyFilter regEx="/[a-z0-9_]/i"/> 
+	              </p:inputText>
+	              <p:message for="custId" display="text">
+		  			  </p:message>
+	              <p:commandButton id="searchBtn" value="Search Customer" validateClient="false" action="#{landingManagedBean.onCustomerSearch}" process="@form" update="tab1"></p:commandButton>
+	            </h:panelGrid>
+	            
+	            <p:panelGrid columns="2"  style="width:1500px"  rendered="#{landingManagedBean.oldCustomer}">
+				    <f:facet name="header">
+				        <h:outputText value="Customer Details"></h:outputText>
+				    </f:facet>
+				    
+				    <h:outputText value="Customer ID:" />
+				    <h:outputText value="#{landingManagedBean.customerHolder.customerId}" />
+				     
+				    <h:outputText value="Customer Name:" />
+				    <h:outputText value="#{landingManagedBean.customerHolder.customerName}" />
+				     
+				    <h:outputText value="Gender:" />
+				    <h:outputText value="#{landingManagedBean.customerHolder.gender}" />
+				     
+				    <h:outputText value="Customer Address: " />
+				    <h:outputText value="#{landingManagedBean.customerHolder.address}" />
+				     
+				    <h:outputText value="Email ID: " />
+				    <h:outputText value="#{landingManagedBean.customerHolder.email}" />
+				    
+				    <h:outputText value="Telephone Number: " />
+				    <h:outputText value="#{landingManagedBean.customerHolder.telephone}" />
+				    
+				    <h:outputText value="Customer Type: " />
+				    <h:outputText value="#{landingManagedBean.customerHolder.customerType}" />
+				    
+				    <h:outputText value="Registered Date " />
+				    <h:outputText value="#{landingManagedBean.customerHolder.createdDate}" />
+   	                
+				</p:panelGrid>
+				
+				<h:panelGrid columns="2" cellpadding="10" rendered="#{landingManagedBean.oldCustomer}">
+					<p:commandButton value="Billing Entry" validateClient="false" action="#{landingManagedBean.onBillEntry}" process="@form" update="tab1"></p:commandButton>
+					<p:commandButton value="Clear" validateClient="false" action="#{landingManagedBean.onClearSearch}" process="@form" update="tab1"></p:commandButton>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" cellpadding="10" rendered="#{landingManagedBean.billPanel}">
+		            
+		              <h:outputText style="color:white" value="Groceries Bill Amount: "></h:outputText>
+		              <p:inputText id="grosAmt" value="#{landingManagedBean.groceryAmount}">
+		              		<p:keyFilter regEx="/[\d\.\s,]/"/>
+		              </p:inputText>
+		              
+		              <h:outputText style="color:white" value="Non Groceries Bill Amount: "></h:outputText>
+		              <p:inputText id="nonGrosAmt" value="#{landingManagedBean.nonGroceryAmount}">
+		                   <p:keyFilter regEx="/[\d\.\s,]/"/>
+		              </p:inputText>
+		              
+    				  <p:commandButton value="Generate Bill" validateClient="false" action="#{landingManagedBean.onGenerateBill}" process="@form" update="tab1"></p:commandButton>
+					  <p:commandButton value="Clear" validateClient="false" action="#{landingManagedBean.onClearBill}" process="@form" update="tab1"></p:commandButton>
+		              
+		              
+		        </h:panelGrid>
+				<ui:include src="./billInvoiceDialog.xhtml"></ui:include>
+            </h:form>
+        </p:tab>
+        <p:tab title="Register Customer">
+          <h:form prependId="false" id="tab2">
+                    <p:messages id="messages" for="regBtn" autoUpdate="true" closable="true" />
+		            <h:panelGrid columns="3" cellpadding="10">
+		            
+		              <h:outputText style="color:white" value="Customer Name: "></h:outputText>
+		              <p:inputText id="newId" value="#{landingManagedBean.newCustomerHolder.customerName}" required="true" requiredMessage="Please enter Customer Name"></p:inputText>
+		              <p:message for="newId" display="text">
+		  			  </p:message>
+		              
+		              <h:outputText style="color:white" value="Gender: "></h:outputText>
+		              
+		              <p:selectOneRadio style="color:white" id="newGender" required="true" requiredMessage="Please select Gender" value="#{landingManagedBean.newCustomerHolder.gender}">
+			            <f:selectItem itemLabel="Male" itemValue="Male" />
+			            <f:selectItem itemLabel="Female" itemValue="Female" />
+			         </p:selectOneRadio>
+		              
+		              
+		              <p:message for="newGender" display="text">
+		  			  </p:message>
+		              
+		              
+		              <h:outputText style="color:white" value="Customer Address: "></h:outputText>
+		              <p:inputText id="newAddress" value="#{landingManagedBean.newCustomerHolder.address}" required="true" requiredMessage="Please enter Customer Address"></p:inputText>
+		              <p:message for="newAddress" display="text">
+		  			  </p:message>
+		              
+		              <h:outputText style="color:white" value="Email ID: "></h:outputText>
+		              <p:inputText id="newEmail" value="#{landingManagedBean.newCustomerHolder.email}" required="true" requiredMessage="Please enter Email ID"></p:inputText>
+		              <p:message for="newEmail" display="text">
+		  			  </p:message>
+		              
+		              <h:outputText style="color:white" value="Telephone Number: "></h:outputText>
+		              <p:inputText id="newTele" value="#{landingManagedBean.newCustomerHolder.telephone}" required="true" requiredMessage="Please enter Telephone Number"></p:inputText>
+		              <p:message for="newTele" display="text">
+		  			  </p:message>
+		              
+		              <h:outputText style="color:white" value="Customer Type: "></h:outputText>
+		              <p:selectOneMenu id="newType" required="true" requiredMessage="Please select Customer Type" value="#{landingManagedBean.newCustomerHolder.customerType}">
+		                 <f:selectItem itemLabel="Please select" itemValue=""></f:selectItem>
+		                 <f:selectItem itemLabel="Employee" itemValue="Employee"></f:selectItem>
+		                 <f:selectItem itemLabel="Affiliate" itemValue="Affiliate"></f:selectItem>
+		                 <f:selectItem itemLabel="Customer" itemValue="Customer"></f:selectItem>
+		              </p:selectOneMenu>
+		              <p:message for="newType" display="text">
+		  			  </p:message>
+		             
+		              
+		              <p:commandButton id="regBtn" value="Register" validateClient="false" action="#{landingManagedBean.onRegisterCustomer}" process="@form" update="tab2"></p:commandButton>
+					  <p:commandButton value="Cancel" validateClient="false" action="#{landingManagedBean.onCancel}" process="@form" update="tab2"></p:commandButton>
+		              
+		                
+		            </h:panelGrid>
+		      </h:form>
+        </p:tab>
+        <p:tab title="About">
+          <h:form prependId="false" id="tab3">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:outputText style="color:white" value="Page Construction in progress" />
+            </h:panelGrid>
+          </h:form>
+        </p:tab>
+    </p:tabView>
+</ui:define>
+	</ui:composition>
+	
+</html>

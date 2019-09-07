@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:dialog id="billDialog"  widgetVar="billDialogVar" header="Retail Store Bill Invoice"  width="1000" modal="true" >
+    
+    <h:panelGrid title="Customer Details" columns="2">
+    
+                    <h:outputText value="Customer ID:" />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.customerId}" />
+				     
+				    <h:outputText value="Customer Name:" />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.customerName}" />
+				     
+				    <h:outputText value="Gender:" />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.gender}" />
+				     
+				    <h:outputText value="Customer Address: " />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.address}" />
+				     
+				    <h:outputText value="Email ID: " />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.email}" />
+				    
+				    <h:outputText value="Telephone Number: " />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.telephone}" />
+				    
+				    <h:outputText value="Customer Type: " />
+				    <h:outputText styleClass="text-bold" value="#{landingManagedBean.customerHolder.customerType}" />
+    
+    </h:panelGrid>
+    
+    
+    <p:panelGrid columns="2"  style="width:900px" styleClass="panel-margin text-center">
+		            
+		            <h:outputText  value="Groceries Bill Amount: "></h:outputText>
+		            <h:outputText value="#{landingManagedBean.groceryAmount}">
+		                 <f:convertNumber pattern="#0.00" />
+		            </h:outputText>
+		              
+		            <h:outputText  value="Non Groceries Bill Amount: "></h:outputText>
+		            <h:outputText value="#{landingManagedBean.nonGroceryAmount}">
+		                 <f:convertNumber pattern="#0.00" />
+		            </h:outputText>
+		            
+		            <h:outputText  value="Total Amount"></h:outputText>
+		            <h:outputText value="#{landingManagedBean.totalAmount}">
+		                  <f:convertNumber pattern="#0.00" />
+		            </h:outputText>
+		            
+		            
+		            <h:outputText  value="Discount % (non-grocery items)"></h:outputText>
+		              <h:outputText value="#{landingManagedBean.discountPercentage}">
+		            </h:outputText>
+		            
+		            <h:outputText  value="Additional Discount"></h:outputText>
+		              <h:outputText value="5 $ on spent of 100 $ each on Grocery items">
+		            </h:outputText>
+		            
+		            <h:outputText  value="Discount Amount"></h:outputText>
+		            <h:outputText value="#{landingManagedBean.discount}">
+		                  <f:convertNumber pattern="#0.00" />
+		            </h:outputText>
+		            
+		            <h:outputText styleClass="text-bold"  value="Total Payable Amount"></h:outputText>
+		            <h:outputText styleClass="text-bold" value="#{landingManagedBean.totalPayableAmount}">
+		                  <f:convertNumber pattern="#0.00" /> 
+		            </h:outputText>
+		            
+		            
+		              
+      </p:panelGrid>
+      
+      
+      <h:panelGrid columns="2" cellpadding="20" cellspacing="10" style="margin-left:350px">
+              <p:commandButton value="Print" ></p:commandButton>
+			  <p:commandButton value="PDF"></p:commandButton>
+      </h:panelGrid>
+    
+    
+    
+</p:dialog> 
+
+
+</ui:composition>
