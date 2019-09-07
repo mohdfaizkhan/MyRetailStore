@@ -85,6 +85,10 @@ Case 5 :- The percentage based discounts do not apply on groceries.
 ![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/15.png "preview15")
 
 
+# Code Coverage Report:
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/CodeCovrage.png "preview16")
+
 
 
 
