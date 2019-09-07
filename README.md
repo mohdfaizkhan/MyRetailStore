@@ -33,7 +33,7 @@ Username : admin Password : admin123
 # Retail Application Summary page
 In this page you have mainly 3 Tabs, first one is for fetching the customer info and generate discount based bill based on the Customer segments whether he is Staff,Affiliate or Customer who is over  2 years with the store
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/2.png "preview2")
 
 # Validation 
 Validation to Enter Customer ID which is manadatory for all the customers
