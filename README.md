@@ -33,40 +33,58 @@ Username : admin Password : admin123
 # Retail Application Summary page
 In this page you have mainly 3 Tabs, first one is for fetching the customer info and generate discount based bill based on the Customer segments whether he is Staff,Affiliate or Customer who is over  2 years with the store
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/2.png "preview2")
 
 # Validation 
 Validation to Enter Customer ID which is manadatory for all the customers
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/3.png "preview3")
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/4.png "preview4")
+
+# Customer Register
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/5.png "preview5")
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/8.png "preview8")
+
+# Entry in DB
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/7.png "preview7")
 
 # Customer Information Summary Flow
 On entering Customer ID and clicking on search it will display a panel which will show all the customer related data like his name, address,email,telephone and the segment of the customer with 2 options Bill entry or clear the search
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/10.png "preview10")
 
 # Bill Entry
 On Click of Bill entry option, the below form will appear where i have segregated the Customer purchases as 2 categories grocery items and non grocery items , as both have rsepective discounts for the store. On enetering amount based on purchases and generate bill it will show a popup with Bill invoice
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/11.png "preview11")
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/12.png "preview12")
 
-# New Customer Registration Flow
-If any new customer shops at store and Store person unable to view his details , he is having an option to register new customer for the first time purchase which is mandatory for generating bill. This can be done through Register Customer Option on the Second Tab. 
+# Test Cases: 
+Case 1:- If the user is an employee of the store, he gets a 30% discount
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/12.png "preview12")
 
-![Alt Text]
+Case 2:- If the user is an affiliate of the store, he gets a 10% discount
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/13.png "preview13")
 
-![Alt Text]
+Case 3:- If the user has been a customer for over 2 years, he gets a 5% discount.
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/16.png "preview16")
+
+Case 4 :- For every $100 on the bill, there would be a $ 5 discount (e.g. for $ 990, you get $ 45
+as a discount).
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/14.png "preview14")
+
+Case 5 :- The percentage based discounts do not apply on groceries.
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/15.png "preview15")
 
 
-# Verification
-Now check for the added customer in the 1st tab
 
-![Alt Text]
+
+
