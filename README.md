@@ -38,12 +38,22 @@ In this page you have mainly 3 Tabs, first one is for fetching the customer info
 # Validation 
 Validation to Enter Customer ID which is manadatory for all the customers
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/3.png "preview3")
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/4.png "preview4")
+
+# Customer Register
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/5.png "preview5")
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/8.png "preview8")
+
+# Entry in DB
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/7.png "preview7")
 
 # Customer Information Summary Flow
 On entering Customer ID and clicking on search it will display a panel which will show all the customer related data like his name, address,email,telephone and the segment of the customer with 2 options Bill entry or clear the search
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/10.png "preview10")
 
 # Bill Entry
 On Click of Bill entry option, the below form will appear where i have segregated the Customer purchases as 2 categories grocery items and non grocery items , as both have rsepective discounts for the store. On enetering amount based on purchases and generate bill it will show a popup with Bill invoice
