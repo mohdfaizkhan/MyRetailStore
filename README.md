@@ -58,25 +58,33 @@ On entering Customer ID and clicking on search it will display a panel which wil
 # Bill Entry
 On Click of Bill entry option, the below form will appear where i have segregated the Customer purchases as 2 categories grocery items and non grocery items , as both have rsepective discounts for the store. On enetering amount based on purchases and generate bill it will show a popup with Bill invoice
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/11.png "preview11")
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/12.png "preview12")
 
-# New Customer Registration Flow
-If any new customer shops at store and Store person unable to view his details , he is having an option to register new customer for the first time purchase which is mandatory for generating bill. This can be done through Register Customer Option on the Second Tab. 
+# Test Cases: 
+Case 1:- If the user is an employee of the store, he gets a 30% discount
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/12.png "preview12")
 
-![Alt Text]
+Case 2:- If the user is an affiliate of the store, he gets a 10% discount
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/13.png "preview13")
 
-![Alt Text]
+Case 3:- If the user has been a customer for over 2 years, he gets a 5% discount.
 
-![Alt Text]
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/16.png "preview16")
+
+Case 4 :- For every $100 on the bill, there would be a $ 5 discount (e.g. for $ 990, you get $ 45
+as a discount).
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/14.png "preview14")
+
+Case 5 :- The percentage based discounts do not apply on groceries.
+
+![alt text](https://github.com/mohdfaizkhan/MyRetailStore/blob/master/screenshot/15.png "preview15")
 
 
-# Verification
-Now check for the added customer in the 1st tab
 
-![Alt Text]
+
+
