@@ -1,48 +1,50 @@
-package com.retail.store;
+package com.mohdfai.retail;
+
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.retail.store.common.ItemType;
-import com.retail.store.common.UserType;
-import com.retail.store.model.Bill;
-import com.retail.store.model.Item;
-import com.retail.store.model.User;
-import com.retail.store.service.RetailService;
+import com.mohdfai.common.ItemType;
+import com.mohdfai.common.UserType;
+import com.mohdfai.model.Bill;
+import com.mohdfai.model.Item;
+import com.mohdfai.model.User;
+import com.mohdfai.service.RetailService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StoreServiceTest {
 	
 	@Autowired
-	private RetailService LandinLandingManagedBean;
+	private RetailService retailService;
 	
 	@Test
 	public void testRetailServiceEmployee() {
+		
 		Bill bill = retailService.generateBill(getUser(UserType.EMPLOYEE));
 		System.out.println("Bill"+ bill.getPayableAmount());
-		Assert.assertEquals(755.0d, bill.getPayableAmount(),0.0);
+		assertEquals(755.0d, bill.getPayableAmount(),0.0);
 	}
 	
 	
 	@Test
 	public void testRetailServiceAffiliated() {
 		Bill bill = retailService.generateBill(getUser(UserType.AFFILIATED));
-		Assert.assertEquals(885.0d, bill.getPayableAmount(),0.0);
+		assertEquals(885.0d, bill.getPayableAmount(),0.0);
 		
 	}
 	
 	@Test
 	public void testRetailServiceValuedCustomer() {
 		Bill bill = retailService.generateBill(getUser(UserType.VALUED_CUSTOMER));
-		Assert.assertEquals(920.0d, bill.getPayableAmount(),0.0);
+		assertEquals(920.0d, bill.getPayableAmount(),0.0);
 	}
 	
 	private User getUser(UserType userType) {

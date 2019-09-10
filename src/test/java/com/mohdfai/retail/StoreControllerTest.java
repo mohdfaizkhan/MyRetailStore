@@ -1,7 +1,6 @@
-package com.retail.store;
+package com.mohdfai.retail;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -13,9 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.retail.store.model.Bill;
-import com.retail.store.service.RetailService;
+import com.mohdfai.model.Bill;
+import com.mohdfai.service.RetailService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -38,13 +39,14 @@ public class StoreControllerTest {
 		bill.setNonGroceriesAmount(700);
 		
 		Mockito.when(retailService.generateBill(Mockito.any())).thenReturn(bill);
-		
-		 MvcResult result = mockMvc.perform(post("/retail/bill")
-				.content(content)
-				.contentType(MediaType.APPLICATION_JSON))
+		 RequestBuilder requestBuilder = MockMvcRequestBuilders
+		            .post("/retail/bill")
+		            .accept(MediaType.APPLICATION_JSON)
+		            .content(content)
+		            .contentType(MediaType.APPLICATION_JSON);
+		 MvcResult result = mockMvc.perform(requestBuilder)
 		 		.andReturn();
-		JSONAssert.assertEquals(expectedPayableAmount, result.getResponse().getContentAsString(), false);
-		
+		 JSONAssert.assertEquals(expectedPayableAmount, result.getResponse().getContentAsString(), false);		
 	}
 		
 

@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2019 The Emirates Group. All Rights Reserved. The information specified here is confidential and remains property of the Emirates Group.
+    groupId     - com.emirates.qhandler
+    artifactId  - qhandler
+    name        - qhandler
+    description - Qhandler project for Spring Boot with batch
+    2019
+
+-->
+<!-- Copyright (c) 2019 The Emirates Group. All Rights Reserved. The information 
+	specified here is confidential and remains property of the Emirates Group. 
+	
+	# groupId     - com.emirates
+    # artifactId  - qhandler
+    # name        - qhandler
+    # description - IBE -Qhandler
+	 -->
+<!DOCTYPE configuration>
 
 <configuration scan="true">
 
