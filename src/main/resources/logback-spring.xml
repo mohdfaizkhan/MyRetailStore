@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<springProperty scope="context" name="logPath" source="logging.path" />
+	<springProperty scope="context" name="springAppName"
+		source="spring.application.name" />
+	<springProperty scope="context" name="maxLogFileSize"
+		source="logging.max.file.size" />
+	<springProperty scope="context" name="maxHistory"
+		source="logging.max.history" />
+	<springProperty scope="context" name="maxLogSizeCap"
+		source="logging.max.size.cap" />
+
+	<property name="LOG_PATH" value="${logPath}/${springAppName}" />
+	<property name="DEBUG_LOG_FILE" value="${LOG_PATH}/Debug.log" />
+	<property name="WARN_LOG_FILE" value="${LOG_PATH}/Warn.log" />
+	<property name="ERROR_LOG_FILE" value="${LOG_PATH}/Error.log" />
+	<property name="INFO_LOG_FILE" value="${LOG_PATH}/Info.log" />
+	<property name="TRACE_LOG_FILE" value="${LOG_PATH}/Trace.log" />
+	<property name="ALL_LOG_FILE" value="${LOG_PATH}/All.log" />
+
+	<!-- You can override this to have a custom pattern -->
+	<property name="CONSOLE_LOG_PATTERN"
+		value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} 
+			  %X{sessionid} %X{uid} %clr(---){faint}
+              %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%rEx{full,
+              org,
+              reactor,
+              io,
+              java.util
+              }" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="DEBUG-LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${DEBUG_LOG_FILE}</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${DEBUG_LOG_FILE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>5MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="WARN-LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${WARN_LOG_FILE}</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${WARN_LOG_FILE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>5MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="ERROR-LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${ERROR_LOG_FILE}</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${ERROR-LOG}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>5MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="INFO-LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${INFO_LOG_FILE}</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${INFO_LOG_FILE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>5MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="TRACE-LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${TRACE_LOG_FILE}</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${TRACE_LOG_FILE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>5MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="ALL-LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${ALL_LOG_FILE}</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${ALL_LOG_FILE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>5MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>500MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ALL-LOG" />
+		<appender-ref ref="DEBUG-LOG" />
+		<appender-ref ref="INFO-LOG" />
+		<appender-ref ref="TRACE-LOG" />
+		<appender-ref ref="WARN-LOG" />
+		<appender-ref ref="ERROR-LOG" />
+	</root>
+	
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.apache" level="INFO" />
+	<logger name="com.zaxxer.hikari" level="INFO" />
+	<logger name="springfox" level="INFO" />
+	<logger name="javax" level="INFO" />
+
+</configuration>

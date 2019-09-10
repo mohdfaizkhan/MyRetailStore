@@ -1,6 +1,5 @@
 package com.mohdfai.dao;
 
-import com.mohdfai.dto.CustomerHolder;
 import com.mohdfai.entity.CustomerDetails;
 
 /**
@@ -9,9 +8,9 @@ import com.mohdfai.entity.CustomerDetails;
  */
 public interface IRetailWebsiteDao {
 
-	String registerNewCustomer(CustomerHolder customerHolder);
-	
 	CustomerDetails loadCustomerDetails(String customerId);
+
+	String registerNewCustomer(CustomerDetails customerHolder);
 	
 	
 }

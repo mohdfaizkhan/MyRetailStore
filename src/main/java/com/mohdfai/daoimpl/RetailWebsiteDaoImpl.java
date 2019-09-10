@@ -1,6 +1,7 @@
 package com.mohdfai.daoimpl;
 
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -8,9 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.mohdfai.dao.IRetailWebsiteDao;
-import com.mohdfai.dto.CustomerHolder;
-import com.mohdfai.dto.HibernateUtil;
 import com.mohdfai.entity.CustomerDetails;
+import com.mohdfai.retailwebsite.util.HibernateUtil;
 
 /**
  * @author mohdfai
@@ -26,34 +26,16 @@ public class RetailWebsiteDaoImpl implements IRetailWebsiteDao {
 	 * CustomerHolder)
 	 */
 	@Override
-	public String registerNewCustomer(CustomerHolder customerHolder) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		try {
-				session.beginTransaction();
-				CustomerDetails customer = new CustomerDetails();
-				customer.setCustomerName(customerHolder.getCustomerName());
-				customer.setGender(customerHolder.getGender());
-				customer.setAddress(customerHolder.getAddress());
-				customer.setCreatedDate(customerHolder.getCreatedDate());
-				customer.setEmail(customerHolder.getEmail());
-				customer.setTelephone(customerHolder.getTelephone());
-				customer.setCustomerType(customerHolder.getCustomerType());
-				session.save(customer);
-				session.getTransaction().commit();
+	@Transactional
+	public String registerNewCustomer(CustomerDetails customerHolder) {
+		
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		{
+				session.save(customerHolder);
 				return "Success";
 		} catch (HibernateException exception) {
-			
-			if (session.getTransaction() != null) {
-				session.getTransaction().rollback();
-			}
 			throw exception;
-			
-		} finally {
-			session.close();
-			HibernateUtil.getSessionFactory().close();
 		}
-
 	}
 
 	/*
@@ -62,28 +44,19 @@ public class RetailWebsiteDaoImpl implements IRetailWebsiteDao {
 	 * @see com.mohdfai.dao.IRetailWebsiteDao#loadCustomerDetails(java.lang.String)
 	 */
 	@Override
+	@Transactional
 	public CustomerDetails loadCustomerDetails(String customerId) {
 
-		CustomerDetails customer = new CustomerDetails();
-
-		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		try {
-				session.beginTransaction();
+		CustomerDetails customer = CustomerDetails.builder().build();
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		{
 				Criteria criteria = session.createCriteria(CustomerDetails.class);
 				criteria.add(Restrictions.eq("customerId",Integer.parseInt(customerId)));
 				customer = (CustomerDetails) criteria.uniqueResult();
-				session.getTransaction().commit();
 			
 		} catch (Exception exception) {
-			customer = new CustomerDetails();
-			session.getTransaction().rollback();
 			throw exception;
-		} finally {
-			session.close();
-			HibernateUtil.getSessionFactory().close();
 		}
-
 		return customer;
 	}
 

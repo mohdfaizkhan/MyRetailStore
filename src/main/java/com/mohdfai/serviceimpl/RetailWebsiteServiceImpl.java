@@ -1,11 +1,12 @@
 package com.mohdfai.serviceimpl;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import com.mohdfai.dao.IRetailWebsiteDao;
-import com.mohdfai.dto.CustomerHolder;
 import com.mohdfai.entity.CustomerDetails;
 import com.mohdfai.service.IRetailWebsiteService;
 
@@ -22,34 +23,18 @@ public class RetailWebsiteServiceImpl implements IRetailWebsiteService {
 
 	@Override
 	@Transactional
-	public String registerNewCustomer(CustomerHolder customerHolder) {
-
+	public String registerNewCustomer(CustomerDetails customerHolder) 
+	{
 		return retailDao.registerNewCustomer(customerHolder);
-
 	}
 
 	@Override
-	@Transactional
-	public CustomerHolder loadCustomerDetails(String customerId) {
+	public CustomerDetails loadCustomerDetails(String customerId)
+	{
+		return Optional.of(retailDao.loadCustomerDetails(customerId))
+		.map(customer->customer)
+		.orElse(CustomerDetails.builder().build());
 
-		CustomerHolder customerHolder = new CustomerHolder();
-
-		CustomerDetails customer = retailDao.loadCustomerDetails(customerId);
-
-		if (null != customer) {
-
-			customerHolder.setCustomerId(String.valueOf(customer.getCustomerId()));
-			customerHolder.setCustomerName(customer.getCustomerName());
-			customerHolder.setGender(customer.getGender());
-			customerHolder.setAddress(customer.getAddress());
-			customerHolder.setEmail(customer.getEmail());
-			customerHolder.setTelephone(customer.getTelephone());
-			customerHolder.setCustomerType(customer.getCustomerType());
-			customerHolder.setCreatedDate(customer.getCreatedDate());
-
-		}
-
-		return customerHolder;
 	}
 
 }

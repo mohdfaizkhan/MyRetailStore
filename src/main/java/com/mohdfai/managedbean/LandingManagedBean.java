@@ -14,9 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.TabChangeEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
-import com.mohdfai.dto.CommonUtils;
-import com.mohdfai.dto.CustomerHolder;
+import com.mohdfai.entity.CustomerDetails;
+import com.mohdfai.retailwebsite.util.CommonUtils;
 import com.mohdfai.service.IRetailWebsiteService;
 
 /**
@@ -25,24 +28,21 @@ import com.mohdfai.service.IRetailWebsiteService;
  */
 @ManagedBean
 @ViewScoped
+@Component
 public class LandingManagedBean implements Serializable{
 	
 	private static final Logger logger = LogManager.getLogger("LandingManagedBean");
 	@Inject
 	IRetailWebsiteService retailService;
-
-
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	@Autowired
+	private Environment env;
 	
+	private static final long serialVersionUID = 1L;
 	private String customerId;
 	private boolean oldCustomer = false;
 	private boolean billPanel = false;
-	private CustomerHolder customerHolder = null;
-	private CustomerHolder newCustomerHolder = null;
+	private CustomerDetails customerHolder = null;
+	private CustomerDetails newCustomerHolder = null;
 	private double groceryAmount = 0.0;
 	private double nonGroceryAmount = 0.0;
 	private double totalAmount = 0.0;
@@ -55,8 +55,8 @@ public class LandingManagedBean implements Serializable{
 	public void init() {
 		this.oldCustomer = false;
 		this.billPanel = false;
-		this.customerHolder = new CustomerHolder();
-		this.newCustomerHolder = new CustomerHolder();
+		this.customerHolder = CustomerDetails.builder().build();
+		this.newCustomerHolder = CustomerDetails.builder().build();
 		customerId = "";
 		
 	}
@@ -66,12 +66,10 @@ public class LandingManagedBean implements Serializable{
 	 */
 	public void onCustomerSearch() {
 		
-			CustomerHolder customerData = getRetailService().loadCustomerDetails(customerId);
+		CustomerDetails customerData = getRetailService().loadCustomerDetails(customerId);
 
-			if (null != customerData && null != customerData.getCustomerId()
-					&& customerData.getCustomerId().length() > 0) {
+			if (null != customerData) {
 				this.oldCustomer = true;
-				customerHolder = new CustomerHolder();
 				customerHolder = customerData;
 
 			} else {
@@ -86,7 +84,6 @@ public class LandingManagedBean implements Serializable{
 	  public void onTabChange(TabChangeEvent event) {
 		  init();
 	    }
-	
 
 	/**
 	 * This method returns the Bill invoice with the Total payable amount and discount details
@@ -98,18 +95,18 @@ public class LandingManagedBean implements Serializable{
 
 			switch (customerHolder.getCustomerType().toUpperCase()) {
 			case "EMPLOYEE":
-                discount = nonGroceryAmount * (0.3);
+                discount = nonGroceryAmount * (Integer.parseInt(env.getProperty("employee.discount"))/100);
                 this.discountPercentage = "30 %";
 				break;
 				
 			case "AFFILIATE":
-				discount = nonGroceryAmount * (0.1);
+				discount = nonGroceryAmount * (Integer.parseInt(env.getProperty("affiliate.discount"))/100);
 				this.discountPercentage = "10 %";
 				break;
 				
 			case "CUSTOMER":
 				if(CommonUtils.getDiffYears(customerHolder.getCreatedDate(), new Date()) >=2) {
-                  discount = nonGroceryAmount * (0.05);
+                  discount = nonGroceryAmount * (Integer.parseInt(env.getProperty("customer.discount"))/100);
                   this.discountPercentage = "5 %";
                   
 				} else {
@@ -124,15 +121,13 @@ public class LandingManagedBean implements Serializable{
 			
 			if(groceryAmount > 100) {
 				
-				discount = discount + (((int) groceryAmount/100) * 5);
+				discount = discount + (((int) groceryAmount/100) * Integer.parseInt(env.getProperty("grocrey.dicsount")));
 			}
 			logger.info("===============================discount = "+discount);
 			totalPayableAmount = totalAmount - discount;
 			
 			PrimeFaces current = PrimeFaces.current();
 			current.executeScript("PF('billDialogVar').show();");
-			
-
 		}
 		
 	}
@@ -183,7 +178,7 @@ public class LandingManagedBean implements Serializable{
 		String status = getRetailService().registerNewCustomer(newCustomerHolder);
 		
 		if(null!= status && status.length()>0 && "Success".equalsIgnoreCase(status)) {
-			newCustomerHolder=new CustomerHolder();
+			newCustomerHolder=CustomerDetails.builder().build();
 			FacesContext.getCurrentInstance().addMessage("mainForm:regBtn", new FacesMessage("Customer Added Successfully!"));
 
 		} else {
@@ -197,7 +192,7 @@ public class LandingManagedBean implements Serializable{
 	 * This method is called when user clicks cancel from Home tab
 	 */
 	public void onCancel() {
-		this.newCustomerHolder = new CustomerHolder();
+		this.newCustomerHolder =  CustomerDetails.builder().build();
 	}
 	
 
@@ -210,11 +205,11 @@ public class LandingManagedBean implements Serializable{
 	}
 
 
-	public CustomerHolder getCustomerHolder() {
+	public CustomerDetails getCustomerHolder() {
 		return customerHolder;
 	}
 
-	public void setCustomerHolder(CustomerHolder customerHolder) {
+	public void setCustomerHolder(CustomerDetails customerHolder) {
 		this.customerHolder = customerHolder;
 	}
 
@@ -274,11 +269,11 @@ public class LandingManagedBean implements Serializable{
 		this.totalPayableAmount = totalPayableAmount;
 	}
 
-	public CustomerHolder getNewCustomerHolder() {
+	public CustomerDetails getNewCustomerHolder() {
 		return newCustomerHolder;
 	}
 
-	public void setNewCustomerHolder(CustomerHolder newCustomerHolder) {
+	public void setNewCustomerHolder(CustomerDetails newCustomerHolder) {
 		this.newCustomerHolder = newCustomerHolder;
 	}
 	

@@ -1,4 +1,4 @@
-package com.mohdfai.dto;
+package com.mohdfai.retailwebsite.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +37,6 @@ public class HibernateUtil {
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
 	/**
 	 * Close caches and connection pools
 	 */

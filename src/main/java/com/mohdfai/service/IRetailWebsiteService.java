@@ -1,6 +1,6 @@
 package com.mohdfai.service;
 
-import com.mohdfai.dto.CustomerHolder;
+import com.mohdfai.entity.CustomerDetails;
 
 /**
  * @author mohdfai
@@ -8,8 +8,8 @@ import com.mohdfai.dto.CustomerHolder;
  */
 public interface IRetailWebsiteService {
 	
-    String registerNewCustomer(CustomerHolder customerHolder);
+    String registerNewCustomer(CustomerDetails customerHolder);
 	
-	CustomerHolder loadCustomerDetails(String customerId); 
+    CustomerDetails loadCustomerDetails(String customerId); 
 
 }
